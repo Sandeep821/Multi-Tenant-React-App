@@ -1,0 +1,25 @@
+navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+
+.pull-left {
+    float:left;
+}
+
+.pull-right {
+    float:right;
+}
+
+.bs-example .container {
+    width: auto;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}

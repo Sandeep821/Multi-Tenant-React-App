@@ -1,0 +1,31 @@
+//variables
+@import "colors.scss";
+//mixins
+@mixin transition($e) {
+  -webkit-transition: $e;
+    -moz-transition:  $e;
+        transition:   $e;
+}
+@mixin translateY($e) {
+  -webkit-transform: translateY($e);
+    -moz-transform:  translateY($e);
+        transform:  translateY($e);
+}
+//Default CSS
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 19px;
+  color: $black;
+  font-style: normal;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  @include transition(.4s ease-in-out);
+
+  &:hover {
+    color: $red;
+    @include transition(.4s ease-in-out);
+  }
+}

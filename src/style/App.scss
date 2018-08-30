@@ -1,0 +1,93 @@
+@import "style/colors.scss";
+@import "style/_config.scss";
+
+header {
+  position: relative;
+  display: block;
+  width: 100%;
+  background: $black;
+  color: $white;
+  height: 90px;
+
+  .logo {
+    font-size: 19px;
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    @include translateY(-50%);
+  }
+
+  nav,
+  nav ul,
+  nav ul li {
+    margin: 0;
+    padding: 0;
+  }
+
+  nav {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    @include translateY(-50%);
+
+    ul li {
+      list-style-type: none;
+      display: inline-block;
+      margin-right: 10px;
+
+      &.last {
+        margin: 0;
+      }
+
+      a {
+        font-size: 19px;
+        line-height: normal;
+        color: $white;
+      }
+    }
+  }
+}
+
+h1 {
+  text-align: center;
+}
+
+.content {
+  max-width: 75%;
+  margin: auto;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 250px;
+  padding: 20px;
+  color: white;
+
+  .App-title {
+    font-size: 1.5em;
+    color: $primary-color;
+  }
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.navbar-nav li {
+  display: inline;
+  margin-right: 20px;
+}
