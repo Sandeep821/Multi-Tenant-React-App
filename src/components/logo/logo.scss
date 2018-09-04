@@ -1,0 +1,18 @@
+.logo {
+    width: 200px;
+    height: 70px;
+    &.audiUsa {
+        background-image: url("../../static/media/audi_logo.png");
+        background-repeat: no-repeat;
+        background-position: right top;
+        background-size: 120px;
+    }
+
+    &.buggatti {
+        background-image: url("../../static/media/logobugatti_84x44.webp");
+        background-repeat: no-repeat;
+        background-position: right top;
+        background-size: 120px;
+    }
+    
+}

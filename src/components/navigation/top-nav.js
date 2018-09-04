@@ -8,17 +8,16 @@ class Navigation extends Component {
         <nav>
           <ul>
             <li className="first">
-              <div to='/'>Home</div>
+              <div to='/'><a>Home &nbsp;&nbsp;|</a></div>
             </li>
             <li>
-              <div to='/Products'>Products</div>
+              <div to='/Products'><a>Products &nbsp;&nbsp;|</a></div>
             </li>
             <li className="last">
-              <div to='/Contact'>Contact</div>
+              <div to='/Contact'><a>Contact &nbsp;&nbsp;</a></div>
             </li>
           </ul>
         </nav>
     )}
 }
 export default Navigation;
-
