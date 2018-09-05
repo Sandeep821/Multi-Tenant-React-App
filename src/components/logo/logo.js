@@ -4,9 +4,6 @@ import logo from '../../static/media/audi_logo.png';
 
 //dynamic images import
 
-
-
-
 class Logo extends Component {
   render() {
     return (

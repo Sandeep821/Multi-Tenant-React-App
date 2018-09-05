@@ -5,16 +5,15 @@ import './header.css'
 
 // tenant name
 
-
-
 class Header extends Component {
   render() {
     return (
        <header>
-           <div class="logo pull-left"><Logo site="audiUsa"></Logo></div>
-           <div class="pull-right"><Navigation></Navigation></div>
+           {/*use site name auid or bugatti*/}
+           <div className={'logo ' + 'logo-'+this.props.site.style.logo.direction}>
+           <Logo site={this.props.site.name}></Logo></div>
+           <div className={this.props.site.style.nav.direction}><Navigation></Navigation></div>
        </header>
-       
     )}
 }
 

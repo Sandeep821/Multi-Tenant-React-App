@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Button, Jumbotron } from 'react-bootstrap';
 import logo from './logo.svg';
-import './App.css';
+import './style/App.css';
 
 
 //components
@@ -28,15 +28,30 @@ class App extends Component {
   constructor () {
   super()
     this.state = {
-      msg: 'default state msg'
+      msg: 'default state msg',
+      site: {
+        name: 'audiUsa',
+        style: {
+          logo : {
+            direction:'left'
+          },
+          nav : {
+            direction:'right'
+          }
+        }
+      }
     }
     this.httpCall = this.httpCall.bind(this)
     this.backToDefault = this.backToDefault.bind(this)
   }
 
+  getStyleConfig() {
+    axios.get('/api/style-config').then(response => this.setState({site: response.data.site}))
+  }
+
   httpCall() {
-    axios.get('/api/test')
-      .then(response => this.setState({msg: response.data.express}))
+    axios.get('/api/style-config')
+      .then(response => this.setState({msg: response.data.msg}))
   }
 
   backToDefault() {
@@ -45,6 +60,8 @@ class App extends Component {
   }
 
   render() {
+    this.getStyleConfig();
+    this.httpCall();
     const divStyle = {
       background: '#333'
     };
@@ -73,19 +90,19 @@ class App extends Component {
       /* _Layout_ */
       <div className="App" >
  
-    {/* _Header_ */}
-    <div class="row">
-      <div class="col-lg-12" style={divStyle}>
-      <Header></Header>
+      {/* _Header_ */}
+      <div class="row">
+        <div class="col-lg-12" style={divStyle}>
+        <Header site={this.state.site}></Header>
+        </div>
       </div>
-    </div>
      
 
       {/* _Collage_ */}
       <div class="row">
-      <div class="col-lg-12" style={divStyle}>
-      <Collage></Collage>
-      </div>
+        <div class="col-lg-12" style={divStyle}>
+        <Collage></Collage>
+        </div>
       </div>
 
       
@@ -133,7 +150,7 @@ class App extends Component {
       <div class="row">
       <div class="col-lg-12" style={divStyle}>
       <p className="App-intro">
-        <button className="button" onClick={this.httpCall}>Call from DATA API!</button> 
+        <button className="button" onClick={this.httpCall}>{this.state.site.name}--Call from DATA API!</button> 
          - <code>{this.state.msg}</code> -
          <button className="button" onClick={this.backToDefault}>Call from USER API!</button>
       </p>

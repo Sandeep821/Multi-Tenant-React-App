@@ -1,11 +1,12 @@
 @import "style/colors.scss";
 @import "style/_config.scss";
 
+
 header {
   position: relative;
   display: block;
   width: 100%;
-  background: $black;
+  background: #541717;
   color: $white;
   height: 90px;
 
@@ -13,23 +14,18 @@ header {
     font-size: 19px;
     position: absolute;
     top: 50%;
-    left: 15px;
+    margin-left: 20px;
     @include translateY(-50%);
   }
 
   nav,
   nav ul,
   nav ul li {
-    margin: 0;
+    margin: 12px;
     padding: 0;
   }
 
   nav {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    @include translateY(-50%);
-
     ul li {
       list-style-type: none;
       display: inline-block;
@@ -59,6 +55,7 @@ h1 {
 
 .App {
   text-align: center;
+  overflow: hidden;
 }
 
 .App-logo {
