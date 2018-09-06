@@ -4,6 +4,13 @@ import { Button, Jumbotron } from 'react-bootstrap';
 import logo from './logo.svg';
 import './style/App.css';
 
+//react-jsonschema-form
+import Form from "react-jsonschema-form";
+import {Controlled as CodeMirror} from 'react-codemirror2'
+
+// react-toastify
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //components
 import Header from './components/header/header';
@@ -51,17 +58,24 @@ class App extends Component {
 
   httpCall() {
     axios.get('/api/style-config')
-      .then(response => this.setState({msg: response.data.msg}))
+      .then(response => this.setState({msg: response.data.msg}),
+       toast("Message has been updated from data Api !")
+    );
   }
 
   backToDefault() {
     axios.get('/user/hello')
-      .then(response => this.setState({msg:  response.data.express}))
+      .then(response => this.setState({msg:  response.data.express}).
+      toast("Wow so easy !")
+    )
+     
   }
+  
+  notify = () => toast("Wow so easy !");
 
   render() {
     this.getStyleConfig();
-    this.httpCall();
+    // this.httpCall();
     const divStyle = {
       background: '#333'
     };
@@ -86,6 +100,97 @@ class App extends Component {
       height: '50px',
       padding: '15px'
     };
+
+
+    // react-jsonschema-form schema starts
+
+    const schematest = {
+      title: "Todo",
+      type: "object",
+      required: ["title"],
+      properties: {
+        title: {type: "string", title: "Title", default: "A new task"},
+        done: {type: "boolean", title: "Done?", default: false}
+      }
+    };
+     
+    let schema = {
+      "title": "A registration form",
+      "description": "A simple form example.",
+      "type": "object",
+      "required": [
+        "firstName",
+        "lastName"
+      ],
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "title": "First name"
+        },
+        "lastName": {
+          "type": "string",
+          "title": "Last name"
+        },
+        "age": {
+          "type": "integer",
+          "title": "Age"
+        },
+        "bio": {
+          "type": "string",
+          "title": "Bio"
+        },
+        "password": {
+          "type": "string",
+          "title": "Password",
+          "minLength": 3
+        },
+        "telephone": {
+          "type": "string",
+          "title": "Telephone",
+          "minLength": 10
+        }
+      }
+    };
+
+    let uiSchema = {
+      "firstName": {
+        "ui:autofocus": true,
+        "ui:emptyValue": ""
+      },
+      "age": {
+        "ui:widget": "updown",
+        "ui:title": "Age of person",
+        "ui:description": "(earthian year)"
+      },
+      "bio": {
+        "ui:widget": "textarea"
+      },
+      "password": {
+        "ui:widget": "password",
+        "ui:help": "Hint: Make it strong!"
+      },
+      "date": {
+        "ui:widget": "alt-datetime"
+      },
+      "telephone": {
+        "ui:options": {
+          "inputType": "tel"
+        }
+      }
+    };
+    let formData = {
+      "firstName": "Chuckgdfgdf",
+      "lastName": "Norris",
+      "age": 75,
+      "bio": "Roundhouse kicking asses since 1940",
+      "password": "noneed"
+    };
+    const log = (type) => console.log.bind(console, type);
+    const onSubmit = ({formData}) => console.log("Data submitted: ",  formData);
+    const onError = (errors) => console.log("I have", errors.length, "errors to fix");
+    const liveValidate = true;
+    // react-jsonschema-form end
+
     return (
       /* _Layout_ */
       <div className="App" >
@@ -147,16 +252,39 @@ class App extends Component {
         </div>
       </div>
 
+       {/* _APi call buttons to test api calls_ */}
       <div class="row">
-      <div class="col-lg-12" style={divStyle}>
-      <p className="App-intro">
-        <button className="button" onClick={this.httpCall}>{this.state.site.name}--Call from DATA API!</button> 
-         - <code>{this.state.msg}</code> -
-         <button className="button" onClick={this.backToDefault}>Call from USER API!</button>
-      </p>
-      </div>
+        <div class="col-lg-12" style={divStyle}>
+        <p className="App-intro">
+         <button className="button" onClick={this.httpCall}>{this.state.site.name}--Call from DATA API!</button> 
+           - <code>{this.state.msg}</code> -
+          <button className="button" onClick={this.backToDefault}>Call from USER API!</button>
+         </p>
+        </div>
       </div>
 
+     {/* _react-jsonschema-form test_ */}
+   
+     <div class="col-lg-4">
+
+      <Form schema={schema}
+        formData={formData}
+        uiSchema={uiSchema}
+        onChange={log("changed")}
+        onSubmit={onSubmit}
+        onError={onError} >
+        </Form>
+     </div>
+
+     <div class="col-lg-4">
+     <div>
+          <button onClick={this.notify}>Notify !</button>
+          <ToastContainer />
+        </div>
+     </div>
+
+     <div class="col-lg-4">
+    </div>
     </div>
     );
   }
