@@ -26,9 +26,7 @@ import PaymentForm from './payment';
 // http cals methods 
 const axios = require('axios');
 let apiData = "test";
-
-
-
+let tenantId = "002";
 
 const Home = () => (
   <div>
@@ -54,29 +52,53 @@ class App extends Component {
             direction:'right'
           }
         }
+      },
+      verbiage: {
+          bannerheading: "Explore myAudi",
+          banners: [{
+            title: "Account Management",
+            image: "account.jpg"
+          }, {
+            title: "Vehicle Details",
+            image: "vehicle.jpg"
+          }, {
+            title: "Exclusive benefits & Content",
+            image: "exclusive.jpg"
+          }]
       }
     }
     this.httpCall = this.httpCall.bind(this)
     this.backToDefault = this.backToDefault.bind(this)
   }
 
+
+
   componentDidMount() {
     // Typical usage (don't forget to compare props):
     this.getStyleConfig();
-
-  
+    this.getVerbiageConfig();
   }
 
   getStyleConfig() {
-    let tenantId = "002";
     axios.get('/api/style-config/'+tenantId)
     .then(response => {
-      this.setState(response.data)
-      toast("Message has been updated for " + response.data.tenantName +" !")
+      this.setState({site:response.data.site})
+      toast("Style config has been updated for " + response.data.tenantName +" !")
     }
-  ).catch(error =>{
-    toast("Not able to get data from data API, Tyr again later!");
-  });
+    ).catch(error =>{
+      toast("Not able to get Style config data, try again later!");
+    });
+  }
+
+  getVerbiageConfig() {
+    axios.get('/api/verbiage-config/'+tenantId)
+    .then(response => {
+      this.setState({verbiage:response.data.details})
+      toast("Verbiage config been updated for " + response.data.tenantName +" !")
+    }
+    ).catch(error =>{
+      toast("Not able to get Verbiage config, try again later!");
+    });
   }
 
   httpCall() {
@@ -247,7 +269,7 @@ class App extends Component {
       {/* _Banner_ */}
       <div class="row align-items-start">
          <div class="col-lg-10 offset-lg-3">
-         <h1 class="pull-left" style={bannerHeading}>Explore myAudi</h1>
+         <h1 class="pull-left" style={bannerHeading}>{this.state.verbiage.bannerheading}</h1>
         </div>
 
         {/*- Banner 1-*/}
