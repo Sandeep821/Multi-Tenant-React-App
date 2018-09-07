@@ -14,7 +14,7 @@ header {
     font-size: 19px;
     position: absolute;
     top: 50%;
-    margin-left: 20px;
+
     @include translateY(-50%);
   }
 

@@ -12,6 +12,12 @@ import {Controlled as CodeMirror} from 'react-codemirror2'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// router
+import Products from './pages/products';
+
+//
+import * as qs from 'query-string';
+
 //components
 import Header from './components/header/header';
 import Collage from './components/collage/collage';
@@ -20,6 +26,8 @@ import PaymentForm from './payment';
 // http cals methods 
 const axios = require('axios');
 let apiData = "test";
+
+
 
 
 const Home = () => (
@@ -52,15 +60,34 @@ class App extends Component {
     this.backToDefault = this.backToDefault.bind(this)
   }
 
+  componentDidMount() {
+    // Typical usage (don't forget to compare props):
+    this.getStyleConfig();
+
+  
+  }
+
   getStyleConfig() {
-    axios.get('/api/style-config').then(response => this.setState({site: response.data.site}))
+    let tenantId = "002";
+    axios.get('/api/style-config/'+tenantId)
+    .then(response => {
+      this.setState(response.data)
+      toast("Message has been updated for " + response.data.tenantName +" !")
+    }
+  ).catch(error =>{
+    toast("Not able to get data from data API, Tyr again later!");
+  });
   }
 
   httpCall() {
-    axios.get('/api/style-config')
-      .then(response => this.setState({msg: response.data.msg}),
-       toast("Message has been updated from data Api !")
-    );
+    axios.get('/api/style-config/002')
+      .then(response => {
+        this.setState({msg: response.data.msg})
+        toast("Message has been updated for " + response.data.tenantName +" !")
+      }
+    ).catch(error =>{
+      toast("Not able to get data from data API, Tyr again later!");
+    });
   }
 
   backToDefault() {
@@ -74,7 +101,7 @@ class App extends Component {
   notify = () => toast("Wow so easy !");
 
   render() {
-    this.getStyleConfig();
+    // this.getStyleConfig();
     // this.httpCall();
     const divStyle = {
       background: '#333'
@@ -103,7 +130,6 @@ class App extends Component {
 
 
     // react-jsonschema-form schema starts
-
     const schematest = {
       title: "Todo",
       type: "object",
@@ -285,6 +311,9 @@ class App extends Component {
 
      <div class="col-lg-4">
     </div>
+         <Router>
+          <Route exact path='/:tenantId' component={Products}></Route>
+         </Router>
     </div>
     );
   }
