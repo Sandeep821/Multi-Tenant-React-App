@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Button, Jumbotron } from 'react-bootstrap';
 import logo from './logo.svg';
 import './style/App.css';
+import style from './style/style.js';
+
 
 //react-jsonschema-form
 import Form from "react-jsonschema-form";
@@ -21,12 +23,12 @@ import * as qs from 'query-string';
 //components
 import Header from './components/header/header';
 import Collage from './components/collage/collage';
+import Banner from './components/banner/banner'
 import PaymentForm from './payment';
 
 // http cals methods 
 const axios = require('axios');
 let apiData = "test";
-let tenantId = "002";
 
 const Home = () => (
   <div>
@@ -41,6 +43,7 @@ class App extends Component {
   constructor () {
   super()
     this.state = {
+      tenantId: '001',
       msg: 'default state msg',
       site: {
         name: 'audiUsa',
@@ -55,32 +58,42 @@ class App extends Component {
       },
       verbiage: {
           bannerheading: "Explore myAudi",
-          banners: [{
+      },
+      element: {
+        details: {
+          bannersData : [{
             title: "Account Management",
-            image: "account.jpg"
-          }, {
+            image: "https://s7d9.scene7.com/is/image/Audiusastaging/audi-lifestyle-015?wid=307&fit=constrain"
+          },{
             title: "Vehicle Details",
-            image: "vehicle.jpg"
-          }, {
-            title: "Exclusive benefits & Content",
-            image: "exclusive.jpg"
+            image: "https://s7d9.scene7.com/is/image/Audiusastaging/audi-lifestyle-014?wid=430&fit=constrain"
+          },{
+            title: "Exclusive benefits",
+            image: "https://s7d9.scene7.com/is/image/Audiusastaging/audi-lifestyle-016?wid=430&fit=constrain"
           }]
-      }
+        }
+    }
     }
     this.httpCall = this.httpCall.bind(this)
     this.backToDefault = this.backToDefault.bind(this)
   }
 
-
-
   componentDidMount() {
     // Typical usage (don't forget to compare props):
     this.getStyleConfig();
     this.getVerbiageConfig();
+    this.getElementConfig();
+  }
+
+  setTenatId() {
+    let path = window.location.pathname;
+    let getTenantId = path.slice(1)
+    console.log(getTenantId);
   }
 
   getStyleConfig() {
-    axios.get('/api/style-config/'+tenantId)
+    const getTeantId = window.location.pathname.slice(1) || this.state.tenantId;
+    axios.get('/api/style-config/'+getTeantId)
     .then(response => {
       this.setState({site:response.data.site})
       toast("Style config has been updated for " + response.data.tenantName +" !")
@@ -91,10 +104,24 @@ class App extends Component {
   }
 
   getVerbiageConfig() {
-    axios.get('/api/verbiage-config/'+tenantId)
+    const getTeantId = window.location.pathname.slice(1) || this.state.tenantId;
+    axios.get('/api/verbiage-config/'+getTeantId)
     .then(response => {
-      this.setState({verbiage:response.data.details})
-      toast("Verbiage config been updated for " + response.data.tenantName +" !")
+      this.setState({verbiage: response.data.details})
+      toast("Verbiage config has been updated for " + response.data.tenantName +" !")
+    }
+    ).catch(error =>{
+      toast("Not able to get Verbiage config, try again later!");
+    });
+  }
+
+  getElementConfig() {
+    const getTeantId = window.location.pathname.slice(1) || this.state.tenantId;
+    axios.get('/api/element-config/'+getTeantId)
+    .then(response => {
+      this.setState({element: response.data})
+      console.log('data', response.data.details.bannersData);
+      toast("Element config has been updated for " + response.data.tenantName +" !")
     }
     ).catch(error =>{
       toast("Not able to get Verbiage config, try again later!");
@@ -123,10 +150,8 @@ class App extends Component {
   notify = () => toast("Wow so easy !");
 
   render() {
-    // this.getStyleConfig();
-    // this.httpCall();
     const divStyle = {
-      background: '#333'
+      background: '#333',
     };
 
     const borderStyle = {
@@ -135,8 +160,7 @@ class App extends Component {
   
     const banner = {
       background: '#fff',
-      padding: '10px',
-      height: '300px'
+      padding: '10px'
     };
 
     const bannerHeading = {
@@ -150,6 +174,7 @@ class App extends Component {
       padding: '15px'
     };
 
+    // banner data
 
     // react-jsonschema-form schema starts
     const schematest = {
@@ -199,7 +224,6 @@ class App extends Component {
         }
       }
     };
-
     let uiSchema = {
       "firstName": {
         "ui:autofocus": true,
@@ -261,7 +285,7 @@ class App extends Component {
       
       {/* _Content_ */}
       <div class="row">
-      <div class="col-lg-12" style={borderStyle}>
+      <div class="col-lg-12" style={style.borderStyle}>
       
       </div>
       </div>
@@ -271,25 +295,9 @@ class App extends Component {
          <div class="col-lg-10 offset-lg-3">
          <h1 class="pull-left" style={bannerHeading}>{this.state.verbiage.bannerheading}</h1>
         </div>
-
-        {/*- Banner 1-*/}
-        <div class="col-lg-2  offset-lg-3" style={banner}>
-        <img class="pull-left" width={350} height={200} src="https://s7d9.scene7.com/is/image/Audiusastaging/audi-lifestyle-015?wid=307&fit=constrain"></img>
-        <h2 class="pull-left">Account Management</h2>
+        <div class="col-lg-9 offset-lg-3">
+        <Banner data={this.state.element.details.bannersData}></Banner>
         </div>
-
-        {/*- Banner 2-*/}
-        <div class="col-lg-2" style={banner}>
-        <img class="pull-left" width={350} height={200} src="https://s7d9.scene7.com/is/image/Audiusastaging/audi-lifestyle-014?wid=430&fit=constrain"></img>
-        <h2 class="pull-left">Vehicle Details</h2>
-        </div>
-
-        {/*- Banner 3-*/}
-        <div class="col-lg-2" style={banner}>
-        <img class="pull-left" width={350} height={200} src="https://s7d9.scene7.com/is/image/Audiusastaging/audi-lifestyle-016?wid=430&fit=constrain"></img>
-        <h2 class="pull-left">Exclusive benefits & Content</h2>
-        </div>
-
       </div>
 
 
