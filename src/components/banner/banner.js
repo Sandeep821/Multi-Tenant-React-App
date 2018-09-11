@@ -5,9 +5,9 @@ class Banner extends Component {
     const banner = {
         background: '#fff',
         padding: '10px'
-      };
+    };
 
-    var listItems = this.props.data.map(function(item) {
+    let listItems = this.props.data.map(function(item) {
         return (
             <div class="col-lg-2" style={banner}>
             <img class="pull-left" width={350} height={200} src={item.image}></img>

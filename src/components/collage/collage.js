@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Jumbotron, Carousel } from 'react-bootstrap';
+import bugattiImage01Tp from '../../static/media/bugatti-veyron-png-2202.png';
+import bugattiImage02White from '../../static/media/bigatti-white-small.jfif';
 
 class Collage extends Component {
 
@@ -15,30 +17,22 @@ class Collage extends Component {
             margin: '0 auto',
             color: 'red'
         }
+     console.log('Carousal data', this.props.data);
+        let listItems = this.props.data.map(function(item) {
+
+            return (
+                <Carousel.Item >
+                <img width={900} height={400} style={slideStyle} alt="900x500" src={item.image}/>
+                <Carousel.Caption>
+                <h3 style={textStyle}>{item.title}</h3>
+                <p style={textStyle}>{item.description}</p>
+                </Carousel.Caption>
+                </Carousel.Item>
+            );
+          });
         return (
-         
                     <Carousel style={carouselStyle}>
-                    <Carousel.Item >
-                        <img width={900} height={400} style={slideStyle} alt="900x500" src="https://s7d9.scene7.com/is/image/Audiusastaging/2018-Audi-R8-Spyder-Tango-Red?wid=1332&hei=685" />
-                        <Carousel.Caption>
-                        <h3 style={textStyle}>First slide label</h3>
-                        <p style={textStyle}>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img width={900} height={400} style={slideStyle} alt="900x500" src="https://s7d9.scene7.com/is/image/Audiusastaging/2018-Audi-R8-Spyder-Mythos-Black?wid=1332&hei=685" />
-                        <Carousel.Caption>
-                        <h3 style={textStyle}>Second slide label</h3>
-                        <p style={textStyle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img width={900} height={400} style={slideStyle} alt="900x500" src="https://s7d9.scene7.com/is/image/Audiusastaging/2018-Audi-R8-Spyder-Vegas-Yellow?wid=1332&hei=685" />
-                        <Carousel.Caption>
-                        <h3 style={textStyle}>Third slide label</h3>
-                        <p style={textStyle}>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
+                   {listItems}
                     </Carousel>
         )
     }

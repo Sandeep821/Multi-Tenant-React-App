@@ -70,7 +70,8 @@ class App extends Component {
           },{
             title: "Exclusive benefits",
             image: "https://s7d9.scene7.com/is/image/Audiusastaging/audi-lifestyle-016?wid=430&fit=constrain"
-          }]
+          }],
+          carouselData: []
         }
     }
     }
@@ -278,7 +279,7 @@ class App extends Component {
       {/* _Collage_ */}
       <div class="row">
         <div class="col-lg-12" style={divStyle}>
-        <Collage></Collage>
+        <Collage data={this.state.element.details.carouselData}></Collage>
         </div>
       </div>
 
@@ -322,14 +323,13 @@ class App extends Component {
      {/* _react-jsonschema-form test_ */}
    
      <div class="col-lg-4">
-
-      <Form schema={schema}
+      {/* <Form schema={schema}
         formData={formData}
         uiSchema={uiSchema}
         onChange={log("changed")}
         onSubmit={onSubmit}
         onError={onError} >
-        </Form>
+        </Form> */}
      </div>
 
      <div class="col-lg-4">
