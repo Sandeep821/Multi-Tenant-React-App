@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import './top-nav.css';
+import Products from '../../pages/products';
 
 //components
 
@@ -25,8 +26,11 @@ class Navigation extends Component {
               <div to='/Contact'><a>Contact &nbsp;&nbsp;</a></div>
             </li>
           </ul>
+          <Router>
+         <Route exact path='/products' component={Products}></Route>
+        </Router>
         </nav>
-        
+
     )}
 }
 export default Navigation;

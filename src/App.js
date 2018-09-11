@@ -15,29 +15,22 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // router
-import Products from './pages/products';
+
 
 //
 import * as qs from 'query-string';
 
 //components
+import Home from './pages/home'
 import Header from './components/header/header';
 import Collage from './components/collage/collage';
-import Banner from './components/banner/banner'
+import Banner from './components/banner/banner';
+import Products from './pages/products';
 import PaymentForm from './payment';
 
 // http cals methods 
 const axios = require('axios');
 let apiData = "test";
-
-const Home = () => (
-  <div>
-    <Header></Header>
-      <hr />
-          <div>
-    </div>
-  </div>
-);
 
 class App extends Component {
   constructor () {
@@ -164,10 +157,6 @@ class App extends Component {
       padding: '10px'
     };
 
-    const bannerHeading = {
-      margin: '10px 0 20px -8px'
-    }
-
     const footer = {
       background: '#330c0c',
       color: '#fff',
@@ -275,29 +264,11 @@ class App extends Component {
         </div>
       </div>
      
-
+   
       {/* _Collage_ */}
       <div class="row">
         <div class="col-lg-12" style={divStyle}>
-        <Collage data={this.state.element.details.carouselData}></Collage>
-        </div>
-      </div>
-
-      
-      {/* _Content_ */}
-      <div class="row">
-      <div class="col-lg-12" style={style.borderStyle}>
-      
-      </div>
-      </div>
-
-      {/* _Banner_ */}
-      <div class="row align-items-start">
-         <div class="col-lg-10 offset-lg-3">
-         <h1 class="pull-left" style={bannerHeading}>{this.state.verbiage.bannerheading}</h1>
-        </div>
-        <div class="col-lg-9 offset-lg-3">
-        <Banner data={this.state.element.details.bannersData}></Banner>
+        <Home data={this.state}></Home>
         </div>
       </div>
 

@@ -1,24 +1,31 @@
-import React, { Component } from 'react';
-import { Button, Jumbotron, Carousel } from 'react-bootstrap';
+import React, {
+    Component
+} from 'react';
+import {
+    Button,
+    Jumbotron,
+    Carousel
+} from 'react-bootstrap';
 import bugattiImage01Tp from '../../static/media/bugatti-veyron-png-2202.png';
 import bugattiImage02White from '../../static/media/bigatti-white-small.jfif';
 
 class Collage extends Component {
 
-    render () {
-        const carouselStyle = {
-            background: '#fff',
-            color: 'red'
-        }
-        const textStyle = {
-            color: '#333'
-        }
-        const slideStyle = {
-            margin: '0 auto',
-            color: 'red'
-        }
-     console.log('Carousal data', this.props.data);
-        let listItems = this.props.data.map(function(item) {
+    render() {
+            const carouselStyle = {
+                background: '#fff',
+                color: 'red',
+                borderBottom:'1px solid #ddd'
+            }
+            const textStyle = {
+                color: '#333'
+            }
+            const slideStyle = {
+                margin: '0 auto',
+                color: 'red'
+            }
+            console.log('Carousal data', this.props.data);
+            let listItems = this.props.data.map(function (item) {
 
             return (
                 <Carousel.Item >
@@ -31,9 +38,9 @@ class Collage extends Component {
             );
           });
         return (
-                    <Carousel style={carouselStyle}>
-                   {listItems}
-                    </Carousel>
+            <Carousel style={carouselStyle}>
+            {listItems}
+            </Carousel>
         )
     }
 }
