@@ -12,6 +12,9 @@ class LoginForm extends React.Component {
       if ((username === 'audi' || username === 'bugatti') && password === 'demo'){
         this.props.onSignIn(username, password)
       }
+      else {
+          alert('Wrong user Id or password, try again!')
+      }
     }
     
     render() {
@@ -35,7 +38,7 @@ class LoginForm extends React.Component {
                 <input className="form-control" type="password" ref="password" placeholder="enter password" />
                 </div>
 
-                <button type="submit" className="btn btn-primary" value="Login" >Submit</button>
+                <button type="submit" className="btn btn-primary" value="Login" >Login</button>
             </div>
         </div>
       </form>
