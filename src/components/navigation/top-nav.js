@@ -24,7 +24,7 @@ class Navigation extends Component {
              <Link to="/products">Products</Link> &nbsp;&nbsp;| &nbsp;&nbsp;
             </li>
             <li className="last">
-              <div to='/login'><a>Login &nbsp;&nbsp;</a></div>
+            <Link to="/">Logout</Link>
             </li>
           </ul>
     </nav>

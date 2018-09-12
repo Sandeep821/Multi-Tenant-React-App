@@ -15,7 +15,8 @@ class Collage extends Component {
             const carouselStyle = {
                 background: '#fff',
                 color: 'red',
-                borderBottom:'1px solid #ddd'
+                borderBottom:'1px solid #ddd',
+      
             }
             const textStyle = {
                 color: '#333'
@@ -29,11 +30,11 @@ class Collage extends Component {
 
             return (
                 <Carousel.Item >
-                <img width={900} height={400} style={slideStyle} alt="900x500" src={item.image}/>
-                <Carousel.Caption>
-                <h3 style={textStyle}>{item.title}</h3>
-                <p style={textStyle}>{item.description}</p>
-                </Carousel.Caption>
+                    <img width={900} height={400} style={slideStyle} alt="900x500" src={item.image}/>
+                    <Carousel.Caption>
+                    <h3 style={textStyle}>{item.title}</h3>
+                    <p style={textStyle}>{item.description}</p>
+                    </Carousel.Caption>
                 </Carousel.Item>
             );
           });

@@ -22,6 +22,7 @@ import * as qs from 'query-string';
 
 //components
 import Home from './pages/home'
+import Login from './pages/login';
 import Header from './components/header/header';
 import Collage from './components/collage/collage';
 import Banner from './components/banner/banner';
@@ -36,6 +37,7 @@ class App extends Component {
   constructor () {
   super()
     this.state = {
+      user: null,
       tenantId: '001',
       msg: 'default state msg',
       site: {
@@ -74,20 +76,47 @@ class App extends Component {
 
   componentDidMount() {
     // Typical usage (don't forget to compare props):
-    this.getStyleConfig();
-    this.getVerbiageConfig();
-    this.getElementConfig();
+    
+ 
   }
 
-  setTenatId() {
+   // App "actions" (functions that modify state)
+   signIn(username, password) {
+    // This is where you would call Firebase, an API etc...
+    // calling setState will re-render the entire app (efficiently!)
+    let tenantIdToPass ='';
+    console.log('user', username +'-'+ password)
+    this.setState({
+      user: {
+        username,
+        password
+      }
+    })
+
+    if (username === 'audi')
+    {
+      tenantIdToPass = '001'
+    }
+
+    else if (username === 'bugatti') {
+      tenantIdToPass = '002'
+    }
+
+ 
+    this.getStyleConfig(tenantIdToPass);
+    this.getVerbiageConfig(tenantIdToPass);
+    this.getElementConfig(tenantIdToPass);
+  }
+
+  getTenatIdFromUrl() {
     let path = window.location.pathname;
     let getTenantId = path.slice(1)
     console.log(getTenantId);
   }
 
-  getStyleConfig() {
+  getStyleConfig(tenantId) {
     const getTeantId = window.location.pathname.slice(1) || this.state.tenantId;
-    axios.get('/api/style-config/'+getTeantId)
+    axios.get('/api/style-config/'+tenantId)
     .then(response => {
       this.setState({site:response.data.site})
       toast("Style config has been updated for " + response.data.tenantName +" !")
@@ -97,9 +126,9 @@ class App extends Component {
     });
   }
 
-  getVerbiageConfig() {
+  getVerbiageConfig(tenantId) {
     const getTeantId = window.location.pathname.slice(1) || this.state.tenantId;
-    axios.get('/api/verbiage-config/'+getTeantId)
+    axios.get('/api/verbiage-config/'+tenantId)
     .then(response => {
       this.setState({verbiage: response.data.details})
       toast("Verbiage config has been updated for " + response.data.tenantName +" !")
@@ -109,9 +138,9 @@ class App extends Component {
     });
   }
 
-  getElementConfig() {
+  getElementConfig(tenantId) {
     const getTeantId = window.location.pathname.slice(1) || this.state.tenantId;
-    axios.get('/api/element-config/'+getTeantId)
+    axios.get('/api/element-config/'+tenantId)
     .then(response => {
       this.setState({element: response.data})
       console.log('data', response.data.details.bannersData);
@@ -268,13 +297,24 @@ class App extends Component {
             </div>
           </div>
 
+          <div>
+            {
+              (this.state.user) 
+              ? 
+             <Switch>
+              <Route path="/"  render={(props) => <Home {...props} data={this.state} />} />
+              <Route path="/products" component={Products} />
+              {/* <Route path="/login" render={(props) => <Login {...props} onSignIn={this.signIn.bind(this)}/>} /> */}
+             </Switch>
+              : 
+              <div>
+                <Login onSignIn={this.signIn.bind(this)}/>  
+              </div>
+            }
+          </div>
+          
+
           {/* _content_ */}
-          <Switch>
-             <Route path="/"  render={(props) => <Home {...props} data={this.state} />} />
-             <Route path="/products" component={Products} />
-          </Switch>
-     
-         
             {/* <div class="row">
               <div class="col-lg-12" style={divStyle}>
               <Home data={this.state}></Home>
