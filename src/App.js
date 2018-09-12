@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
 import { Button, Jumbotron } from 'react-bootstrap';
 import logo from './logo.svg';
 import './style/App.css';
@@ -254,68 +254,77 @@ class App extends Component {
     // react-jsonschema-form end
 
     return (
+
       /* _Layout_ */
       <div className="App" >
- 
-      {/* _Header_ */}
-      <div class="row">
-        <div class="col-lg-12" style={divStyle}>
-        <Header site={this.state.site}></Header>
-        </div>
-      </div>
+
+    
+        <BrowserRouter>
+         <div> 
+           {/* _Header_ */}
+          <div class="row">
+            <div class="col-lg-12" style={divStyle}>
+            <Header site={this.state.site}></Header>
+            </div>
+          </div>
+
+          {/* _content_ */}
+          <Switch>
+             <Route path="/"  render={(props) => <Home {...props} data={this.state} />} />
+             <Route path="/products" component={Products} />
+          </Switch>
      
+         
+            {/* <div class="row">
+              <div class="col-lg-12" style={divStyle}>
+              <Home data={this.state}></Home>
+              </div>
+            </div> */}
+          </div>
+       </BrowserRouter>  
+
+          {/* _Footer_ */}
+          <div class="row">
+            <div class="col-lg-12" style={footer}>
+            <p>Audi of America. All rights reserved. © Copyright 2018</p>
+            </div>
+          </div>
+
+          {/* _APi call buttons to test api calls_ */}
+          <div class="row">
+            <div class="col-lg-12" style={divStyle}>
+            <p className="App-intro">
+            <button className="button" onClick={this.httpCall}>{this.state.site.name}--Call from DATA API!</button> 
+              - <code>{this.state.msg}</code> -
+              <button className="button" onClick={this.backToDefault}>Call from USER API!</button>
+            </p>
+            </div>
+          </div>
+
+        {/* _react-jsonschema-form test_ */}
+      
+        <div class="col-lg-4">
+          {/* <Form schema={schema}
+            formData={formData}
+            uiSchema={uiSchema}
+            onChange={log("changed")}
+            onSubmit={onSubmit}
+            onError={onError} >
+            </Form> */}
+        </div>
+
+        <div class="col-lg-4">
+        <div>
+              <button onClick={this.notify}>Notify !</button>
+              <ToastContainer />
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+        </div>
    
-      {/* _Collage_ */}
-      <div class="row">
-        <div class="col-lg-12" style={divStyle}>
-        <Home data={this.state}></Home>
-        </div>
-      </div>
-
-
-      {/* _Footer_ */}
-      <div class="row">
-        <div class="col-lg-12" style={footer}>
-        <p>Audi of America. All rights reserved. © Copyright 2018</p>
-        </div>
-      </div>
-
-       {/* _APi call buttons to test api calls_ */}
-      <div class="row">
-        <div class="col-lg-12" style={divStyle}>
-        <p className="App-intro">
-         <button className="button" onClick={this.httpCall}>{this.state.site.name}--Call from DATA API!</button> 
-           - <code>{this.state.msg}</code> -
-          <button className="button" onClick={this.backToDefault}>Call from USER API!</button>
-         </p>
-        </div>
-      </div>
-
-     {/* _react-jsonschema-form test_ */}
-   
-     <div class="col-lg-4">
-      {/* <Form schema={schema}
-        formData={formData}
-        uiSchema={uiSchema}
-        onChange={log("changed")}
-        onSubmit={onSubmit}
-        onError={onError} >
-        </Form> */}
-     </div>
-
-     <div class="col-lg-4">
-     <div>
-          <button onClick={this.notify}>Notify !</button>
-          <ToastContainer />
-        </div>
-     </div>
-
-     <div class="col-lg-4">
     </div>
-         <Router>
-          <Route exact path='/:tenantId' component={Products}></Route>
-         </Router>
-    </div>
+ 
     );
   }
 }

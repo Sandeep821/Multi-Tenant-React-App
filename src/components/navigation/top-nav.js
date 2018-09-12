@@ -14,22 +14,20 @@ import Products from '../../pages/products';
 class Navigation extends Component {
   render() {
     return (
+     
       <nav>
           <ul>
             <li className="first">
-              <div to='/'><a href="/">Home &nbsp;&nbsp;|</a></div>
+              <Link to="/">Home</Link> &nbsp;&nbsp;| &nbsp;&nbsp;
             </li>
             <li>
-              <div to='/products'><a href="/products">Products &nbsp;&nbsp;|</a></div>
+             <Link to="/products">Products</Link> &nbsp;&nbsp;| &nbsp;&nbsp;
             </li>
             <li className="last">
-              <div to='/Contact'><a>Contact &nbsp;&nbsp;</a></div>
+              <div to='/login'><a>Login &nbsp;&nbsp;</a></div>
             </li>
           </ul>
-          <Router>
-         <Route exact path='/products' component={Products}></Route>
-        </Router>
-        </nav>
+    </nav>
 
     )}
 }
