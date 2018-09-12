@@ -293,7 +293,7 @@ class App extends Component {
            {/* _Header_ */}
           <div class="row">
             <div class="col-lg-12" style={divStyle}>
-            <Header site={this.state.site}></Header>
+            <Header site={this.state}></Header>
             </div>
           </div>
 
@@ -331,7 +331,7 @@ class App extends Component {
           </div>
 
           {/* _APi call buttons to test api calls_ */}
-          <div class="row">
+          {/* <div class="row">
             <div class="col-lg-12" style={divStyle}>
             <p className="App-intro">
             <button className="button" onClick={this.httpCall}>{this.state.site.name}--Call from DATA API!</button> 
@@ -339,7 +339,7 @@ class App extends Component {
               <button className="button" onClick={this.backToDefault}>Call from USER API!</button>
             </p>
             </div>
-          </div>
+          </div> */}
 
         {/* _react-jsonschema-form test_ */}
       
@@ -355,7 +355,7 @@ class App extends Component {
 
         <div class="col-lg-4">
         <div>
-              <button onClick={this.notify}>Notify !</button>
+              {/* <button onClick={this.notify}>Notify !</button> */}
               <ToastContainer />
             </div>
         </div>

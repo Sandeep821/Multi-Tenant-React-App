@@ -10,9 +10,9 @@ class Header extends Component {
     return (
        <header>
            {/*use site name auid or bugatti*/}
-           <div className={'logo ' + 'logo-'+this.props.site.style.logo.direction}>
-           <Logo site={this.props.site.name}></Logo></div>
-           <div className={this.props.site.style.nav.direction}><Navigation></Navigation></div>
+           <div className={'logo ' + 'logo-'+this.props.site.site.style.logo.direction}>
+           <Logo site={this.props.site.site.name}></Logo></div>
+           <div className={this.props.site.site.style.nav.direction}><Navigation data={this.props}></Navigation></div>
        </header>
     )}
 }
