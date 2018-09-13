@@ -6,14 +6,16 @@ import {
 } from 'react-router-dom';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import './top-nav.css';
-import Products from '../../pages/products';
+
 
 //components
+import Logout from '../logout/logout'
+import Products from '../../pages/products';
 
 
 class Navigation extends Component {
   render() {
-    console.log('this.props.data.user', this.props.data)
+    console.log('this.props.data.user -NAV', this.props.data)
     return (
    <div>
       {
@@ -27,7 +29,7 @@ class Navigation extends Component {
           <Link to="/products">Products</Link> &nbsp;&nbsp;| &nbsp;&nbsp;
           </li>
           <li className="last">
-          <Link to="/">Logout</Link>
+          <Logout user={this.props.data.site.user} signOutCallBackNav={this.props.signOutCallBackHeader}></Logout>
           </li>
         </ul>
       </nav>

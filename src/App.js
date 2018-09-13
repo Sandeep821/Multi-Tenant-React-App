@@ -82,30 +82,37 @@ class App extends Component {
 
    // App "actions" (functions that modify state)
    signIn(username, password) {
-    // This is where you would call Firebase, an API etc...
-    // calling setState will re-render the entire app (efficiently!)
-    let tenantIdToPass ='';
-    console.log('user', username +'-'+ password)
-    this.setState({
-      user: {
-        username,
-        password
+      // This is where you would call Firebase, an API etc...
+      // calling setState will re-render the entire app (efficiently!)
+      let tenantIdToPass ='';
+      console.log('user', username +'-'+ password)
+      this.setState({
+        user: {
+          username,
+          password
+        }
+      })
+
+      if (username === 'audi')
+      {
+        tenantIdToPass = '001'
       }
-    })
 
-    if (username === 'audi')
-    {
-      tenantIdToPass = '001'
-    }
+      else if (username === 'bugatti') {
+        tenantIdToPass = '002'
+      }
 
-    else if (username === 'bugatti') {
-      tenantIdToPass = '002'
-    }
+  
+      this.getStyleConfig(tenantIdToPass);
+      this.getVerbiageConfig(tenantIdToPass);
+      this.getElementConfig(tenantIdToPass);
+  }
 
- 
-    this.getStyleConfig(tenantIdToPass);
-    this.getVerbiageConfig(tenantIdToPass);
-    this.getElementConfig(tenantIdToPass);
+  //Signout
+
+  signOut() {
+    // clear out user from state
+    this.setState({user: null})
   }
 
   getTenatIdFromUrl() {
@@ -293,7 +300,7 @@ class App extends Component {
            {/* _Header_ */}
           <div class="row">
             <div class="col-lg-12" style={divStyle}>
-            <Header site={this.state}></Header>
+            <Header site={this.state} signOutCallBack={this.signOut.bind(this)}></Header>
             </div>
           </div>
 

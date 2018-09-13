@@ -12,7 +12,7 @@ class Header extends Component {
            {/*use site name auid or bugatti*/}
            <div className={'logo ' + 'logo-'+this.props.site.site.style.logo.direction}>
            <Logo site={this.props.site.site.name}></Logo></div>
-           <div className={this.props.site.site.style.nav.direction}><Navigation data={this.props}></Navigation></div>
+           <div className={this.props.site.site.style.nav.direction}><Navigation data={this.props} signOutCallBackHeader={this.props.signOutCallBack}></Navigation></div>
        </header>
     )}
 }
