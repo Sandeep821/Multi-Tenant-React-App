@@ -22,3 +22,5 @@ yarn-error.log*
 
 # css
 src/**/*.css
+
+/docs/~$MultiTenant App.pptx
