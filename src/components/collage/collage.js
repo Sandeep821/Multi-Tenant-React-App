@@ -27,7 +27,6 @@ class Collage extends Component {
             }
             console.log('Carousal data', this.props.data);
             let listItems = this.props.data.map(function (item) {
-
             return (
                 <Carousel.Item >
                     <img width={900} height={400} style={slideStyle} alt="900x500" src={item.image}/>
