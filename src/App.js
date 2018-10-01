@@ -85,6 +85,7 @@ class App extends Component {
       // This is where you would call Firebase, an API etc...
       // calling setState will re-render the entire app (efficiently!)
       let tenantIdToPass ='';
+      
       console.log('user', username +'-'+ password)
       this.setState({
         user: {
@@ -122,8 +123,17 @@ class App extends Component {
   }
 
   getStyleConfig(tenantId) {
+    let tenantIdFromAws = 'c9a19d70-c5b3-11e8-8576-a19a0b668508';
+    if (tenantId === '001'){tenantIdFromAws = 'c9a19d70-c5b3-11e8-8576-a19a0b668508'} else if (tenantId === '002') {tenantIdFromAws = 'd7edbda0-c5b3-11e8-8576-a19a0b668508'}
     const getTeantId = window.location.pathname.slice(1) || this.state.tenantId;
-    axios.get('/api/style-config/'+tenantId)
+    const url =  'https://or2vtniqp9.execute-api.us-east-1.amazonaws.com/dev/style/' || '/dev/style/' || '/api/style-config/';
+    axios.get(url + tenantIdFromAws, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      crossDomain: true
+    })
     .then(response => {
       this.setState({site:response.data.site})
       toast("Style config has been updated for " + response.data.tenantName +" !")

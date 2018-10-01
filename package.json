@@ -29,7 +29,9 @@
     "eject": "react-scripts eject"
   },
   "proxy": {
-    "/api": {
+    "/dev": {
+      "target": "https://or2vtniqp9.execute-api.us-east-1.amazonaws.com/"
+    },"/api": {
       "target": "http://localhost:9000/"
     },
     "/user": {
