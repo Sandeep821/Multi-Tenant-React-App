@@ -5,9 +5,9 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 
 ## DEMO and UserId and paswrod to test Multitanancy
-http://multi-tenant-app-fe.s3-website.us-east-2.amazonaws.com/
-- [for Audi: userId : audi, password: demo] 
-- [Bugatti: userId : bugatti, password: demo]
+DEMO - http://multi-tenant-app-fe.s3-website.us-east-2.amazonaws.com/
+- [for Audi: userId : `audi`, password: `demo`] 
+- [Bugatti: userId : `bugatti`, password: `demo`]
 
 ## API for this project is - Multi-Tenant-UI-Api
 - [Multi-Tenant-Serverless-AWS-UI-Api - https://github.com/Sandeep821/Multi-Tenant-Serverless-AWS-UI-Api]
