@@ -1,7 +1,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
+Multi Tenant Application built with REACT (FE) and AWS lambda (API), chnages ist behavior content according to tenant <br>
+
+Tech stack: HTML5, ES6, SASS (node-sass-chokidar), React, Redux, JEST, react-intel, bootstrap, Webpack, VS Code, NodeJS, ExpressJS, DynamoDB, Git, GitHub, Concourse CI, Docker, AWS cloudFront (S3),  AWS Lambda
+
 Below you will find some information on how to perform common tasks.<br>
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 
 ## DEMO and UserId and paswrod to test Multitanancy
