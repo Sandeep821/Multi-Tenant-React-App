@@ -49,13 +49,8 @@ class App extends Component {
           nav : {
             direction:'right'
           }
-        }
-      },
-      verbiage: {
-          bannerheading: "Explore myAudi",
-      },
-      element: {
-        details: {
+        },
+        elements: {
           bannersData : [{
             title: "Account Management",
             image: "https://s7d9.scene7.com/is/image/Audiusastaging/audi-lifestyle-015?wid=307&fit=constrain"
@@ -67,8 +62,11 @@ class App extends Component {
             image: "https://s7d9.scene7.com/is/image/Audiusastaging/audi-lifestyle-016?wid=430&fit=constrain"
           }],
           carouselData: []
-        }
-    }
+      }
+      },
+      verbiage: {
+          bannerheading: "Explore myAudi",
+      }
     }
     this.httpCall = this.httpCall.bind(this)
     this.backToDefault = this.backToDefault.bind(this)
@@ -76,8 +74,6 @@ class App extends Component {
 
   componentDidMount() {
     // Typical usage (don't forget to compare props):
-    
- 
   }
 
    // App "actions" (functions that modify state)
@@ -102,8 +98,6 @@ class App extends Component {
       else if (username === 'bugatti') {
         tenantIdToPass = '002'
       }
-
-  
       this.getStyleConfig(tenantIdToPass);
       this.getVerbiageConfig(tenantIdToPass);
       this.getElementConfig(tenantIdToPass);
@@ -124,7 +118,8 @@ class App extends Component {
 
   getStyleConfig(tenantId) {
     let tenantIdFromAws = 'c9a19d70-c5b3-11e8-8576-a19a0b668508';
-    if (tenantId === '001'){tenantIdFromAws = 'c9a19d70-c5b3-11e8-8576-a19a0b668508'} else if (tenantId === '002') {tenantIdFromAws = 'd7edbda0-c5b3-11e8-8576-a19a0b668508'}
+    // getting data based on data id later this would be handlled by api
+    if (tenantId === '001'){tenantIdFromAws = '24d16b90-cbdf-11e8-9128-c9b3f8fe779d'} else if (tenantId === '002') {tenantIdFromAws = '9ed91910-cbe4-11e8-9128-c9b3f8fe779d'}
     const getTeantId = window.location.pathname.slice(1) || this.state.tenantId;
     const url =  'https://or2vtniqp9.execute-api.us-east-1.amazonaws.com/dev/style/' || '/dev/style/' || '/api/style-config/';
     axios.get(url + tenantIdFromAws, {
@@ -135,14 +130,16 @@ class App extends Component {
       crossDomain: true
     })
     .then(response => {
-      this.setState({site:response.data.site})
-      toast("Style config has been updated for " + response.data.tenantName +" !")
+      this.setState({site:response.data.site});
+      console.log('UPDATED STATE', this.state);
+      toast("Style config has been updated for " + response.data.tenantName +" !");
     }
     ).catch(error =>{
       toast("Not able to get Style config data, try again later!");
     });
   }
 
+   // use this method in case of separate verbiage api
   getVerbiageConfig(tenantId) {
     const getTeantId = window.location.pathname.slice(1) || this.state.tenantId;
     axios.get('/api/verbiage-config/'+tenantId)
@@ -155,6 +152,7 @@ class App extends Component {
     });
   }
 
+  // use this method in case of separate element api
   getElementConfig(tenantId) {
     const getTeantId = window.location.pathname.slice(1) || this.state.tenantId;
     axios.get('/api/element-config/'+tenantId)
@@ -343,7 +341,7 @@ class App extends Component {
           {/* _Footer_ */}
           <div class="row">
             <div class="col-lg-12" style={footer}>
-            <p>Audi of America. All rights reserved. © Copyright 2018</p>
+            <p>Volkswagen. All rights reserved. © Copyright 2018</p>
             </div>
           </div>
 

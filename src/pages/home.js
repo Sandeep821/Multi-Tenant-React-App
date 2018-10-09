@@ -11,12 +11,13 @@ class Home extends React.Component {
         const bannerHeading = {
          margin: '10px 0 20px -8px'
         }
+        console.log('HOME bannersData', this.props.data.site.elements.bannersData);
         
         return (
                 <div style={wrapper}>
                    <div class="row">
                     <div class="col-lg-12">
-                    <Collage data={this.props.data.element.details.carouselData}></Collage>
+                    <Collage data={this.props.data.site.elements.carouselData}></Collage>
                     </div>
                     </div>
         
@@ -25,7 +26,7 @@ class Home extends React.Component {
                     <h1 class="pull-left" style={bannerHeading}>{this.props.data.verbiage.bannerheading}</h1>
                     </div>
                     <div class="col-lg-9 offset-lg-3">
-                    <Banner data={this.props.data.element.details.bannersData}></Banner>
+                    <Banner data={this.props.data.site.elements.bannersData}></Banner>
                     </div>
                 </div>
 
