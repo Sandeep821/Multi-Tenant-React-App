@@ -3,13 +3,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
-## API for this project is - Multi-Tenant-UI-Api
-- [Multi-Tenant-UI-Api - https://github.com/Sandeep821/Multi-Tenant-UI-Api]
-- [run Multi-Tenant-UI-Api first in order to see data changes in FE app ]
-### UserId and paswrod to test Multitanancy
+
+## DEMO and UserId and paswrod to test Multitanancy
+http://multi-tenant-app-fe.s3-website.us-east-2.amazonaws.com/
 - [for Audi: userId : audi, password: demo] 
 - [Bugatti: userId : bugatti, password: demo]
 
+## API for this project is - Multi-Tenant-UI-Api
+- [Multi-Tenant-Serverless-AWS-UI-Api - https://github.com/Sandeep821/Multi-Tenant-Serverless-AWS-UI-Api]
+- [Multi-Tenant-Serverless-AWS-UI-Api  is alreday delpoyed on AWS]
 
 ## Table of Contents
 
