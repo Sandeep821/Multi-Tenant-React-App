@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-Multi-Tenant Application built with REACT (FE) and AWS lambda (API), changes ist behavior/content according to a tenant <br>
+Multi-Tenant Application built with REACT (FE) and AWS lambda (API), changes its behavior/content according to a tenant, so use different (given) login credential to verify the same. <br>
 
 TECH STACK: HTML5, ES6, SASS (node-sass-chokidar), React, Redux, JEST, react-intel, bootstrap, Webpack, VS Code, NodeJS, ExpressJS, DynamoDB, Git, GitHub, AWS cloudFront (S3),  AWS Lambda
 
